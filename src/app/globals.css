@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* --- SOLUCIÓN CRÍTICA PARA EL MODO OSCURO --- */
+/* Esto le dice a Tailwind v4: "Activa el modo oscuro cuando veas la clase .dark en el HTML" */
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
+/* Configuración del tema (opcional, pero recomendada para consistencia) */
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Variables CSS para colores base */
+:root {
+  --background: #f8fafc;
+  /* Slate 50 (Claro) */
+  --foreground: #0f172a;
+  /* Slate 900 (Claro) */
 }
 
+/* Colores cuando el modo oscuro está activo */
+.dark {
+  --background: #020617;
+  /* Slate 950 (Oscuro) */
+  --foreground: #ffffff;
+  /* Texto Blanco */
+}
+
+/* Aplicar variables al body */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
