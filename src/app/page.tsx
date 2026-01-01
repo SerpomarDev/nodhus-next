@@ -5,10 +5,14 @@ import { useTheme } from "next-themes";
 import { Moon, Sun } from 'lucide-react';
 import LoginForm from '@/features/auth/components/LoginForm';
 import LoginInfoPanel from '@/features/auth/components/LoginInfoPanel';
+import RegisterForm from '@/features/auth/components/RegisterForm'; // Importar el nuevo componente
 
 export default function LoginPage() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  // Estado para controlar la vista: 'login' o 'register'
+  const [view, setView] = useState<'login' | 'register'>('login');
 
   useEffect(() => setMounted(true), []);
 
@@ -19,14 +23,22 @@ export default function LoginPage() {
 
       {/* Fondo dinámico */}
       <div className="absolute inset-0 z-0 bg-gray-100 dark:bg-slate-900 transition-colors duration-500">
-        {/* Imagen opcional de fondo */}
         <div className="absolute inset-0 bg-[url('/login-bg.jpg')] bg-cover bg-center opacity-10 dark:opacity-20 mix-blend-overlay"></div>
       </div>
 
       {/* Card Principal */}
       <div className="flex w-full max-w-5xl bg-white dark:bg-slate-800 shadow-2xl rounded-2xl overflow-hidden z-10 min-h-[650px] transition-colors duration-300 border border-gray-200 dark:border-slate-700">
+
+        {/* Panel Izquierdo (Siempre visible, info de la empresa) */}
         <LoginInfoPanel />
-        <LoginForm />
+
+        {/* Panel Derecho (Cambia entre Login y Registro) */}
+        {view === 'login' ? (
+          <LoginForm onSwitchToRegister={() => setView('register')} />
+        ) : (
+          <RegisterForm onSwitchToLogin={() => setView('login')} />
+        )}
+
       </div>
 
       {/* Toggle Theme */}
