@@ -153,7 +153,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         );
     }
 
-    // --- RENDERIZADO DEL FORMULARIO NORMAL ---
+    // --- RENDERIZADO DEL FORMULARIO NORMA ---
     return (
         <div className="w-full md:w-1/2 bg-white dark:bg-slate-800 p-8 lg:p-12 flex flex-col justify-center transition-colors duration-300">
 
